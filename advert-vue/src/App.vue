@@ -1,12 +1,36 @@
 <template>
   <v-app>
-    <v-navigation-drawer app temporary></v-navigation-drawer>
+    <v-navigation-drawer app temporary v-model="drawer">
+      <v-list>
+        <v-list-tile
+         v-for="link of links"
+         :key="link.title"
+         :to="link.url"
+         @click=""
+         >
+          <v-list-tile-action>
+            <v-icon>{{link.icon}}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-title-title v-text="link.title"></v-list-title-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
     <v-toolbar app dark color="primary">
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Advert</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn flat>Link One</v-btn>
+        <v-btn
+         v-for="link of links"
+         :key="link.tile"
+         :to="link.url"
+         flat
+        >
+          <v-icon left>{{link.icon}}</v-icon>
+          {{link.title}}
+        </v-btn>
       </v-toolbar-items>
     </v-toolbar>
     <v-content>
@@ -16,5 +40,18 @@
 </template>
 
 <script>
-
+  export default {
+    data () {
+      return {
+        drawer: false,
+        links: [
+          {
+            title: 'Login',
+            icon: 'lock',
+            url: '/login'
+          }
+        ]
+      }
+    }
+  }
 </script>
