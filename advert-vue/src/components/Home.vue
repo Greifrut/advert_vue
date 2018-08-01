@@ -8,7 +8,11 @@
             v-for="ad in ads"
             :key="ad.id"
             :src="ad.imageSrc"
-            ></v-carousel-item>
+            >
+              <div class="car-link">
+                <v-btn class="error" :to="'/ad/' + ad.id" >{{ad.title}}</v-btn>
+              </div>
+            </v-carousel-item>
           </v-carousel>
         </v-flex>
       </v-layout>
@@ -37,7 +41,7 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn flat >Open</v-btn>
+              <v-btn flat :to="'/ad/' + ad.id" >Open</v-btn>
               <v-btn raised class="primary" >Buy</v-btn>
             </v-card-actions>
           </v-card>
@@ -78,3 +82,16 @@
     }
   }
 </script>
+
+<style scoped>
+  .car-link {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    background: rgba(0,0,0,.5);
+    transform: translate(-50%, 0);
+    padding: 5px 15px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+</style>
