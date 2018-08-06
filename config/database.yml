@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: advert_production
-  username: advert
-  password: <%= ENV['ADVERT_DATABASE_PASSWORD'] %>
+  username: greifrut
+  password: 1
