@@ -73,10 +73,11 @@
           const ad = {
             title: this.title,
             description: this.description,
-            promo: this.promo
+            promo: this.promo,
+            imageSrc: 'https://cdn-images-1.medium.com/max/2000/1*Vc0m5dS9SlhieEbR6n8wFg.jpeg'
           }
 
-          console.log(ad)
+          this.$store.dispatch('createAd', ad)
         }
       }
     }
