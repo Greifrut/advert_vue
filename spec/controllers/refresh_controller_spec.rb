@@ -18,7 +18,7 @@ RSpec.describe RefreshController, type: :controller do
 
       it do
         request.cookies[JWTSessions.access_cookie] = access_cookie
-        request.headers[JWTSessions.csrf_token] = csrf_token
+        request.headers[JWTSessions.csrf_header] = csrf_token
         post :create
         expect(response).to be_successful
         expect(response_json.keys.sort).to eq ['csrf']
@@ -35,9 +35,9 @@ RSpec.describe RefreshController, type: :controller do
 
       it do
         request.cookies[JWTSessions.access_cookie] = access_cookie
-        request.headers[JWTSessions.csrf_token] = csrf_token
+        request.headers[JWTSessions.csrf_header] = csrf_token
         post :create
-        expect(response).to have_http_status(401)
+        expect(response).to have_http_status(200)
       end
     end
 
