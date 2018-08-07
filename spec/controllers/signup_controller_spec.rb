@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe SignupController, type: :controller do
-
   describe 'POST #create' do
-    let(:user_params) { { email: 'test@email.com', password: 'password', password_confirmation: 'password' } }
+    let(:user_params) { { email: 'foo@bar.com', password: 'password', password_confirmation: 'password' } }
 
-    it 'returns http success' do
+    it 'returns http succes' do
       post :create, params: user_params
       expect(response).to be_successful
       expect(response_json.keys).to eq ['csrf']
@@ -19,3 +18,4 @@ RSpec.describe SignupController, type: :controller do
     end
   end
 end
+
