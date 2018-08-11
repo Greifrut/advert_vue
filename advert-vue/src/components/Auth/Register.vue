@@ -92,8 +92,9 @@
           this.signupFailed(response)
           return
         }
-        localStorage.scrf = response.data.csrf
+        localStorage.csrf = response.data.csrf
         localStorage.signedIn = true
+        console.log(response.data)
         this.error = ''
         this.$router.replace('/')
       },

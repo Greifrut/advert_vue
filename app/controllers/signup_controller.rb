@@ -13,7 +13,7 @@ class SignupController < ApplicationController
                           value: tokens[:access],
                           httponly: true,
                           secure: Rails.env.production?)
-      render json: { csrf: tokens[:csrf] }
+      render json: { csrf: tokens[:csrf], email: user.email, id: user.id }
     else
       render json: { error: user.errors.full_messages.join(' ') }, status: :unprocessable_enity
     end
