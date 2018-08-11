@@ -32,7 +32,7 @@
                name="confirm_password"
                label="Confirm Password"
                type="password"
-               v-model="confirmPassword"
+               v-model="password_confirmation"
                :counter="6"
                :rules="confirmPasswordRules"
                ></v-text-field>
@@ -58,7 +58,7 @@
       return {
         email: '',
         password: '',
-        confirmPassword: '',
+        password_confirmation: '',
         valid: false,
         emailRules: [
           v => !!v || 'E-mail is required',
@@ -80,10 +80,27 @@
           const user = {
             email: this.email,
             password: this.password,
-            confirmPassword: this.confirmPassword
+            password_confirmation: this.password_confirmation
           }
-          console.log(user)
+          this.$http.plain.post('/signup', { user })
+            .then(response => this.signupSuccessful(response))
+            .catch(error => this.signupFailed(error))
         }
+      },
+      signupSuccessful (response) {
+        if (!response.data.csrf) {
+          this.signupFailed(response)
+          return
+        }
+        localStorage.scrf = response.data.csrf
+        localStorage.signedIn = true
+        this.error = ''
+        this.$router.replace('/')
+      },
+      signupFailed (error) {
+        this.error = (error.response && error.response.data && error.response.data.error) || 'Something we wrong'
+        delete localStorage.csrf
+        delete localStorage.signedIn
       }
     }
   }
