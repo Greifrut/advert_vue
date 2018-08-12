@@ -14,6 +14,16 @@
             <v-list-tile-title v-text="link.title"></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile
+         @click="onLogout"
+         >
+          <v-list-tile-action>
+            <v-icon>exit_to_app</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title v-text="'Logout'"></v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
 
@@ -36,6 +46,13 @@
         >
           <v-icon left>{{link.icon}}</v-icon>
           {{link.title}}
+        </v-btn>
+         <v-btn
+         @click="onLogout"
+         flat
+        >
+          <v-icon left>exit_to_app</v-icon>
+          Logout
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
@@ -71,6 +88,18 @@
           {title: 'Login', icon: 'lock', url: '/login'},
           {title: 'Registration', icon: 'face', url: '/registration'}
         ]
+      }
+    },
+    methods: {
+      onLogout () {
+        this.$http.plain.delete('/signin')
+          .then(response => {
+            delete localStorage.csrf
+            delete localStorage.signedIn
+            delete localStorage.userId
+            this.$router.replace('/')
+          })
+          .catch(error => (error.response && error.response.data && error.response.data.error))
       }
     }
   }
