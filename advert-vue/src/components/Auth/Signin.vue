@@ -78,7 +78,6 @@
         }
         localStorage.csrf = response.data.csrf
         localStorage.signedIn = true
-        localStorage.userId = response.data.id
         this.error = ''
         this.$router.replace('/')
       },
