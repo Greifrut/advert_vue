@@ -78,6 +78,7 @@
         }
         localStorage.csrf = response.data.csrf
         localStorage.signedIn = true
+        localStorage.userId = response.data.id
         let user = response.data
         this.$store.commit('setUser', user)
         this.error = ''

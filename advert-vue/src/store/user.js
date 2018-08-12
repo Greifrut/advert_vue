@@ -1,20 +1,23 @@
 export default {
   state: {
-    user: {
-      signedIn: false,
-      id: '',
-      email: ''
-    }
+    user: null
   },
   mutations: {
     setUser (state, payload) {
       state.user = payload
     }
   },
-  actions: {},
+  actions: {
+    autoLoginUser ({commit}, payload) {
+      commit('setUser', payload)
+    }
+  },
   getters: {
     user (state) {
       return state.user
+    },
+    isUserLoggedIn (state) {
+      return state.user !== null
     }
   }
 }
