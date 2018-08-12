@@ -94,7 +94,8 @@
         }
         localStorage.csrf = response.data.csrf
         localStorage.signedIn = true
-        console.log(response.data)
+        let user = response.data
+        this.$store.commit('setUser', user)
         this.error = ''
         this.$router.replace('/')
       },
