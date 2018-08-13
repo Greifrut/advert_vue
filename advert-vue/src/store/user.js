@@ -24,11 +24,8 @@ export default {
   },
   actions: {},
   getters: {
-    user (state) {
-      return state.user
-    },
     isUserLoggedIn (state) {
-      return state.user !== null
+      return state.signedIn
     }
   },
   plugins: [createPersistedState]
