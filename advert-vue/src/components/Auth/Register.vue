@@ -87,21 +87,21 @@
             .catch(error => this.signupFailed(error))
         }
       },
-      signupSuccessful (response) {
+      signinSuccessful (response) {
         if (!response.data.csrf) {
-          this.signupFailed(response)
+          this.signinFailed(response)
           return
         }
-        localStorage.csrf = response.data.csrf
-        localStorage.signedIn = true
-        localStorage.userId = response.data.id
-        this.error = ''
-        this.$router.replace('/')
+        this.$http.plain.get('/me')
+          .then(meResponse => {
+            this.$store.commit('setCurrentUser', { currentUser: meResponse.data, csrf: response.data.csrf })
+            this.error = ''
+            this.$roter.replace('/')
+          })
       },
-      signupFailed (error) {
-        this.error = (error.response && error.response.data && error.response.data.error) || 'Something we wrong'
-        delete localStorage.csrf
-        delete localStorage.signedIn
+      signinFailed (error) {
+        this.error = (error.response && error.response.data && error.response.data.error)
+        this.$store.commit('unsetCurrentUser')
       }
     }
   }

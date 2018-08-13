@@ -1,4 +1,5 @@
 require_relative 'support/response_helper.rb'
+require_relative 'support/AuthHelper.rb'
 
 RSpec.configure do |config|
 
@@ -7,6 +8,7 @@ RSpec.configure do |config|
   end
 
   config.include ResponseHelper
+  config.include AuthHelper
 
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
