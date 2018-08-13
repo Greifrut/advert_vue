@@ -25,10 +25,5 @@ new Vue({
   secureAxiosInstance,
   plainAxiosInstance,
   components: { App },
-  template: '<App/>',
-  created () {
-    if (localStorage.userId) {
-      this.$store.dispatch('autoLoginUser', localStorage.userId)
-    }
-  }
+  template: '<App/>'
 })
