@@ -1,17 +1,28 @@
+import createPersistedState from 'vuex-persistedstate'
+
 export default {
   state: {
-    user: null
+    currentUser: {},
+    signedIn: false,
+    csrf: null
   },
   mutations: {
-    setUser (state, payload) {
-      state.user = payload
+    setCurrentUser (state, { currentUser, csrf }) {
+      state.currentUser = currentUser
+      state.signedIn = true
+      state.csrf = csrf
+    },
+    unsetCurrentUser (state) {
+      state.currentUser = {}
+      state.signedIn = false
+      state.csrf = null
+    },
+    refresh (state, csrf) {
+      state.signedIn = true
+      state.csrf = csrf
     }
   },
-  actions: {
-    autoLoginUser ({commit}, payload) {
-      commit('setUser', payload)
-    }
-  },
+  actions: {},
   getters: {
     user (state) {
       return state.user
@@ -19,5 +30,6 @@ export default {
     isUserLoggedIn (state) {
       return state.user !== null
     }
-  }
+  },
+  plugins: [createPersistedState]
 }
