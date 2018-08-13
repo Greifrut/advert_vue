@@ -92,11 +92,9 @@
     },
     methods: {
       onLogout () {
-        this.$http.plain.delete('/signin')
+        this.$http.secured.delete('/signin')
           .then(response => {
-            delete localStorage.csrf
-            delete localStorage.signedIn
-            delete localStorage.userId
+            this.$store.commit('unsetCurrentUser')
             this.$router.replace('/')
           })
           .catch(error => (error.response && error.response.data && error.response.data.error))

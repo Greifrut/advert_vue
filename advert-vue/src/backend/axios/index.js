@@ -1,9 +1,9 @@
 import axios from 'axios'
-import store from '../../store'
+import store from './../../store'
 
 const API_URL = 'http://localhost:3000'
 
-const secureAxiosInstance = axios.create({
+const securedAxiosInstance = axios.create({
   baseURL: API_URL,
   withCredentials: true,
   headers: {
@@ -19,7 +19,7 @@ const plainAxiosInstance = axios.create({
   }
 })
 
-secureAxiosInstance.interceptors.request.use(config => {
+securedAxiosInstance.interceptors.request.use(config => {
   const method = config.method.toUpperCase()
   if (method !== 'OPTIONS' && method !== 'GET') {
     config.headers = {
@@ -30,17 +30,18 @@ secureAxiosInstance.interceptors.request.use(config => {
   return config
 })
 
-secureAxiosInstance.interceptors.response.use(null, error => {
+securedAxiosInstance.interceptors.response.use(null, error => {
   if (error.response && error.response.config && error.response.status === 401) {
     return plainAxiosInstance.post('/refresh', {}, { headers: { 'X-CSRF-TOKEN': store.state.csrf } })
       .then(response => {
-        store.commit('refresh', response.data.csrf)
+        plainAxiosInstance.get('/me')
+          .then(meResponse => store.commit('setCurrentUser', { currentUser: meResponse.data, csrf: response.data.csrf }))
         let retryConfig = error.response.config
-        retryConfig.headers['X-CSRF-TOKEN'] = store.state.csrf
+        retryConfig.headers['X-CSRF-TOKEN'] = response.data.csrf
         return plainAxiosInstance.request(retryConfig)
       })
       .catch(error => {
-        store.commit('unsertCurrentUser')
+        store.commit('unsetCurrentUser')
         location.replace('/')
         return Promise.reject(error)
       })
@@ -49,4 +50,4 @@ secureAxiosInstance.interceptors.response.use(null, error => {
   }
 })
 
-export { secureAxiosInstance, plainAxiosInstance }
+export { securedAxiosInstance, plainAxiosInstance }

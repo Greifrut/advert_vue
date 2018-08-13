@@ -7,13 +7,13 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import store from './store'
 import VueAxios from 'vue-axios'
-import { secureAxiosInstance, plainAxiosInstance } from './backend/axios'
+import { securedAxiosInstance, plainAxiosInstance } from './backend/axios'
 
 Vue.use(Vuetify)
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, {
-  secured: secureAxiosInstance,
+  secured: securedAxiosInstance,
   plain: plainAxiosInstance
 })
 
@@ -22,7 +22,7 @@ new Vue({
   el: '#app',
   router,
   store,
-  secureAxiosInstance,
+  securedAxiosInstance,
   plainAxiosInstance,
   components: { App },
   template: '<App/>'

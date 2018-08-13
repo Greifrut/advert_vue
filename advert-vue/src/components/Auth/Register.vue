@@ -77,17 +77,12 @@
     methods: {
       onSubmit () {
         if (this.$refs.form.validate()) {
-          const user = {
-            email: this.email,
-            password: this.password,
-            password_confirmation: this.password_confirmation
-          }
-          this.$http.plain.post('/signup', { user })
+          this.$http.plain.post('/signup', { email: this.email, password: this.password, password_confirmation: this.password_confirmation })
             .then(response => this.signupSuccessful(response))
             .catch(error => this.signupFailed(error))
         }
       },
-      signinSuccessful (response) {
+      signupSuccessful (response) {
         if (!response.data.csrf) {
           this.signinFailed(response)
           return
@@ -99,7 +94,7 @@
             this.$router.replace('/')
           })
       },
-      signinFailed (error) {
+      signupFailed (error) {
         this.error = (error.response && error.response.data && error.response.data.error)
         this.$store.commit('unsetCurrentUser')
       }
