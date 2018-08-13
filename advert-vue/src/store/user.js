@@ -1,4 +1,3 @@
-import createPersistedState from 'vuex-persistedstate'
 
 export default {
   state: {
@@ -27,6 +26,5 @@ export default {
     isUserLoggedIn (state) {
       return state.signedIn
     }
-  },
-  plugins: [createPersistedState()]
+  }
 }
