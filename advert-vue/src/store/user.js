@@ -28,5 +28,5 @@ export default {
       return state.signedIn
     }
   },
-  plugins: [createPersistedState]
+  plugins: [createPersistedState()]
 }

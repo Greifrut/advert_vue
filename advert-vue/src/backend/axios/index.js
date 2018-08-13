@@ -32,7 +32,7 @@ secureAxiosInstance.interceptors.request.use(config => {
 
 secureAxiosInstance.interceptors.response.use(null, error => {
   if (error.response && error.response.config && error.response.status === 401) {
-    return plainAxiosInstance.post('/refresh', {}, { headers: { 'X-CSRF-TOKEN': localStorage.csrf } })
+    return plainAxiosInstance.post('/refresh', {}, { headers: { 'X-CSRF-TOKEN': store.state.csrf } })
       .then(response => {
         store.commit('refresh', response.data.csrf)
         let retryConfig = error.response.config

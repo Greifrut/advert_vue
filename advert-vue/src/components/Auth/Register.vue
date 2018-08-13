@@ -96,7 +96,7 @@
           .then(meResponse => {
             this.$store.commit('setCurrentUser', { currentUser: meResponse.data, csrf: response.data.csrf })
             this.error = ''
-            this.$roter.replace('/')
+            this.$router.replace('/')
           })
       },
       signinFailed (error) {
