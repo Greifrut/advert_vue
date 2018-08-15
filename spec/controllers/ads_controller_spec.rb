@@ -110,6 +110,15 @@ RSpec.describe AdsController, type: :controller do
       end
     end
 
+    context 'with invalid params' do
+      it 'render a JSON response with error for the ad' do
+        request.cookies[JWTSessions.access_cookie] = @tokens[:access]
+        request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
+        put :update, params: { id: ad.id, ads: invalid_attributes }
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.content_type).to eq('application/json')
+      end
+    end
   end
 
 end
