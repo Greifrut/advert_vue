@@ -119,6 +119,19 @@ RSpec.describe AdsController, type: :controller do
         expect(response.content_type).to eq('application/json')
       end
     end
+
+  end
+
+  describe 'DELETE #destroy' do
+    let!(:ad) { create(:ad, user: user) }
+
+    it 'destroys the requested ad' do
+      request.cookies[JWTSessions.access_cookie] = @tokens[:access]
+      request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
+      expect {
+        delete :destroy, params: { id: ad.id }
+    }.to change(Ad, :count).by(-1)
+    end
   end
 
 end
