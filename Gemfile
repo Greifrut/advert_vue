@@ -19,7 +19,6 @@ gem 'jwt'
 gem 'jwt_sessions', '~> 2.1'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -85,7 +85,13 @@
       },
       signinFailed (error) {
         this.error = (error.response && error.response.data && error.response.data.error)
+        this.$store.commit('setError', error.response.data)
         this.$store.commit('unsetCurrentUser')
+      }
+    },
+    created () {
+      if (this.$route.query['loginError']) {
+        this.$store.commit('setError', 'Please log in this server')
       }
     }
   }

@@ -96,6 +96,7 @@
       },
       signupFailed (error) {
         this.error = (error.response && error.response.data && error.response.data.error)
+        this.$store.commit('setError', error.response.data)
         this.$store.commit('unsetCurrentUser')
       }
     }

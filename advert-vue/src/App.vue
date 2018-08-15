@@ -61,6 +61,25 @@
       <router-view></router-view>
     </v-content>
 
+    <template v-if="error">
+      <v-snackbar
+        :multi-line="true"
+        :timeout="5000"
+        color="error"
+        @input="closeError"
+        :value="true"
+      >
+        {{ error }}
+        <v-btn
+          dark
+          flat
+          @click="closeError"
+        >
+          Close
+        </v-btn>
+      </v-snackbar>
+    </template>
+
   </v-app>
 </template>
 
@@ -88,6 +107,9 @@
           {title: 'Login', icon: 'lock', url: '/login'},
           {title: 'Registration', icon: 'face', url: '/registration'}
         ]
+      },
+      error () {
+        return this.$store.getters.error
       }
     },
     methods: {
@@ -98,6 +120,9 @@
             this.$router.replace('/')
           })
           .catch(error => (error.response && error.response.data && error.response.data.error))
+      },
+      closeError () {
+        this.$store.commit('clearError')
       }
     }
   }

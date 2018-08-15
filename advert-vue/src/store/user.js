@@ -3,7 +3,8 @@ export default {
   state: {
     currentUser: {},
     signedIn: false,
-    csrf: null
+    csrf: null,
+    error: null
   },
   mutations: {
     setCurrentUser (state, { currentUser, csrf }) {
@@ -19,12 +20,21 @@ export default {
     refresh (state, csrf) {
       state.signedIn = true
       state.csrf = csrf
+    },
+    setError (state, error) {
+      state.error = error
+    },
+    clearError (state) {
+      state.error = null
     }
   },
   actions: {},
   getters: {
     isUserLoggedIn (state) {
       return state.signedIn
+    },
+    error (state) {
+      return state.error
     }
   }
 }
