@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe AdsController, type: :controller do
   let(:user) {create(:user)}
+
   let(:valid_attributes) {
-    { title: 'New title', description: 'New description', promo: false}
+    {  title: 'New title', description: 'New description', promo: false }
   }
 
   let(:invalid_attributes) {
@@ -41,6 +42,32 @@ RSpec.describe AdsController, type: :controller do
       get :show, params: { id: ad.id }
       expect(response).to be_successful
     end
+  end
+
+  describe 'POST #create' do
+
+    context 'with valid params' do
+
+      it 'create a new Ad' do
+        request.cookies[JWTSessions.access_cookie] = @tokens[:access]
+        request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
+        expect {
+          post :create, params: { todo: valid_attributes}
+        }.to change(Ad, :count).by(1)
+      end
+
+      it 'render a JSON response with the new ad' do
+        request.cookies[JWTSessions.access_cookie] = @tokens[:access]
+        request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
+        post :create, params: { todo: valid_attributes }
+        expect(response).to have_http_status(:created)
+        expect(response.content_type).to eq('application/json')
+        expect(response.location).to eq(ad_url(Ad.last))
+      end
+
+    end
+
+
   end
 
 end
