@@ -8,7 +8,7 @@ RSpec.describe AdsController, type: :controller do
   }
 
   let(:invalid_attributes) {
-    { title: nil, description: nil }
+    { title: nil, description: nil, promo: "dadds" }
   }
 
   before do
@@ -52,19 +52,35 @@ RSpec.describe AdsController, type: :controller do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
         request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
         expect {
-          post :create, params: { todo: valid_attributes}
+          post :create, params: { ads: valid_attributes}
         }.to change(Ad, :count).by(1)
       end
 
       it 'render a JSON response with the new ad' do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
         request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
-        post :create, params: { todo: valid_attributes }
+        post :create, params: { ads: valid_attributes }
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/json')
         expect(response.location).to eq(ad_url(Ad.last))
       end
 
+      it 'unauth without CSRF' do
+        request.cookies[JWTSessions.access_cookie] = @tokens[:access]
+        post :create, params: { ads: valid_attributes }
+        expect(response).to have_http_status(401)
+      end
+
+    end
+
+    context "with invalid params" do
+      it 'renders a JSON response with errors for the new todo' do
+        request.cookies[JWTSessions.access_cookie] = @tokens[:access]
+        request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
+        post :create, params: { ads: invalid_attributes }
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.content_type).to eq('application/json')
+      end
     end
 
 

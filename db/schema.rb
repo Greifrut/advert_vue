@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 2018_08_15_161609) do
   enable_extension "plpgsql"
 
   create_table "ads", force: :cascade do |t|
-    t.string "title"
-    t.string "description"
+    t.string "title", null: false
+    t.string "description", null: false
     t.boolean "promo", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
