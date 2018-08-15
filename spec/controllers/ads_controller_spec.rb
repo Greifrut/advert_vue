@@ -33,7 +33,14 @@ RSpec.describe AdsController, type: :controller do
     end
   end
 
+  describe "GET #show" do
+    let!(:ad) { create(:ad, user: user) }
 
-
+    it 'returns a success response' do
+      request.cookies[JWTSessions.access_cookie] = @tokens[:access]
+      get :show, params: { id: ad.id }
+      expect(response).to be_successful
+    end
+  end
 
 end
