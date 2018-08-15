@@ -74,7 +74,7 @@ RSpec.describe AdsController, type: :controller do
     end
 
     context "with invalid params" do
-      it 'renders a JSON response with errors for the new todo' do
+      it 'renders a JSON response with errors for the new ad' do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
         request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
         post :create, params: { ads: invalid_attributes }
@@ -83,7 +83,24 @@ RSpec.describe AdsController, type: :controller do
       end
     end
 
+  end
 
+  describe 'PUT #update' do
+    let!(:ad) { create(:ad, user: user) }
+
+    context 'with valid params' do
+      let(:new_attributes) {
+        { title: 'Secret title' }
+      }
+
+      it 'update the requested ad' do
+        request.cookies[JWTSessions.access_cookie] = @tokens[:access]
+        request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
+        put :update, params: { id: ad.id, ads: new_attributes }
+        ad.reload
+        expect(ad.title).to eq new_attributes[:title]
+      end
+    end
   end
 
 end
