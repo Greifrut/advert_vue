@@ -94,16 +94,16 @@
     created () {
       this.$http.plain.get('/ads')
         .then(response => {
-          for (let i = 0; i < response.data.length; i++) {
+          Object.keys(response.data).forEach(key => {
+            const ad = response.data[key]
             this.$store.commit('createAd', {
-              title: response.data[i].title,
-              description: response.data[i].description,
-              promo: response.data[i].promo,
-              id: response.data[i].id,
-              userId: response.data[i].user_id
+              title: ad.title,
+              description: ad.description,
+              promo: ad.promo,
+              id: ad.id,
+              userId: ad.user_id
             })
-          }
-          this.error = ''
+          })
         })
     },
     computed: {

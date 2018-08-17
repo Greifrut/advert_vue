@@ -76,10 +76,14 @@
         }
       },
       createSuccessful (response) {
-        if (!response.data.csrf) {
-          this.errorCreate(response)
-          return
-        }
+        this.$store.commit('createAd', {
+          title: response.data.title,
+          description: response.data.description,
+          userId: response.data.user_id,
+          imageSrc: '',
+          promo: response.data.promo,
+          id: response.data.id
+        })
         this.$router.replace('/')
       },
       errorCreate (error) {
