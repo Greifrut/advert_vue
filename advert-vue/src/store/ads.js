@@ -1,22 +1,29 @@
+class Ad {
+  constructor (title, description, ownerId, imageSrc = '', promo = false, id = null) {
+    this.title = title
+    this.description = description
+    this.ownerId = ownerId
+    this.imageSrc = imageSrc
+    this.promo = promo
+    this.id = id
+  }
+}
+
 export default {
   state: {
-    ads: [
-      {
-        title: '',
-        description: '',
-        promo: false,
-        imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-        id: '',
-        user_id: ''
-      }
-    ]
+    ads: []
   },
   mutations: {
-    createAd (state, { title, description, promo, id }) {
-      state.ads.title = title
-      state.ads.description = description
-      state.ads.promo = promo
-      state.ads.id = id
+    createAd (state, {title, description, promo, id, userId}) {
+      const allAd = new Ad(
+        title,
+        description,
+        userId,
+        '',
+        promo,
+        id
+      )
+      state.ads.push(allAd)
     }
   },
   actions: {},

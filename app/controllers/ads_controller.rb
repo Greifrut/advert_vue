@@ -1,10 +1,10 @@
 class AdsController < ApplicationController
-  before_action :authorize_access_request!
+  before_action :authorize_access_request!, only: [:create, :update, :destroy]
   before_action :set_ad, only: [:show, :update, :destroy]
 
   # GET /ads
   def index
-    @ads = current_user.ads
+    @ads = Ad.all
 
     render json: @ads
   end

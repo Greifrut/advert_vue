@@ -91,6 +91,21 @@
         drawer: false
       }
     },
+    created () {
+      this.$http.plain.get('/ads')
+        .then(response => {
+          for (let i = 0; i < response.data.length; i++) {
+            this.$store.commit('createAd', {
+              title: response.data[i].title,
+              description: response.data[i].description,
+              promo: response.data[i].promo,
+              id: response.data[i].id,
+              userId: response.data[i].user_id
+            })
+          }
+          this.error = ''
+        })
+    },
     computed: {
       isUserLoggedIn () {
         return this.$store.getters.isUserLoggedIn
