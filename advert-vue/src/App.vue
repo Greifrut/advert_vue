@@ -50,6 +50,7 @@
          <v-btn
          @click="onLogout"
          flat
+         v-if="signedIn"
         >
           <v-icon left>exit_to_app</v-icon>
           Logout
@@ -110,6 +111,9 @@
       },
       error () {
         return this.$store.getters.error
+      },
+      signedIn () {
+        return this.$store.state.user.signedIn
       }
     },
     methods: {

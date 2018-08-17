@@ -6,7 +6,8 @@ export default {
         description: '',
         promo: false,
         imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-        id: ''
+        id: '',
+        user_id: ''
       }
     ]
   },

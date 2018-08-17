@@ -40,6 +40,19 @@
 
 <script>
   export default {
+    created () {
+      this.$http.secured.get('/ads')
+        .then(allResponse => {
+          this.$store.commit('createAd', {
+            title: allResponse.data.title,
+            description: allResponse.data.description,
+            promo: allResponse.data.promo,
+            id: allResponse.data.id
+          })
+          this.error = ''
+          this.$router.replace('/list')
+        })
+    },
     computed: {
       myAds () {
         return this.$store.getters.myAds
