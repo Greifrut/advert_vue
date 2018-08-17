@@ -2,40 +2,23 @@ export default {
   state: {
     ads: [
       {
-        title: 'First ads',
-        description: 'Description',
+        title: '',
+        description: '',
         promo: false,
         imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-        id: '1'
-      },
-      {
-        title: 'Second ads',
-        description: 'Description',
-        promo: true,
-        imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-        id: '2'
-      },
-      {
-        title: 'Third ads',
-        description: 'Description',
-        promo: true,
-        imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-        id: '3'
+        id: ''
       }
     ]
   },
   mutations: {
-    createAd (state, payload) {
-      state.ads.push(payload)
+    createAd (state, { title, description, promo, id }) {
+      state.ads.title = title
+      state.ads.description = description
+      state.ads.promo = promo
+      state.ads.id = id
     }
   },
-  actions: {
-    createAd ({commit}, payload) {
-      payload.id = 'qwwqeqwe'
-
-      commit('createAd', payload)
-    }
-  },
+  actions: {},
   getters: {
     ads (state) {
       return state.ads

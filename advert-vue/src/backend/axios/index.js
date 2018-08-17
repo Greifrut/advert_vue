@@ -1,5 +1,5 @@
 import axios from 'axios'
-import store from './../../store'
+import { store } from '../../store/store'
 
 const API_URL = 'http://localhost:3000'
 
@@ -24,7 +24,7 @@ securedAxiosInstance.interceptors.request.use(config => {
   if (method !== 'OPTIONS' && method !== 'GET') {
     config.headers = {
       ...config.headers,
-      'X-CSRF-TOKEN': store.state.csrf
+      'X-CSRF-TOKEN': store.state.user.csrf
     }
   }
   return config

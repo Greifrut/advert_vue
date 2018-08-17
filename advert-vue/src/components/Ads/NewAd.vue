@@ -64,21 +64,37 @@
         title: '',
         description: '',
         promo: false,
-        valid: false
+        valid: false,
+
       }
     },
     methods: {
       createAd () {
         if (this.$refs.form.validate()) {
-          const ad = {
-            title: this.title,
-            description: this.description,
-            promo: this.promo,
-            imageSrc: 'https://cdn-images-1.medium.com/max/2000/1*Vc0m5dS9SlhieEbR6n8wFg.jpeg'
-          }
-
-          this.$store.dispatch('createAd', ad)
+          this.$http.secured.post('/ads', { ads: {title: this.title, description: this.description, promo: this.promo, user_id: this.$store.state.user.currentUser.id}})
+            .then(response => this.createSuccessful(response))
+            .catch(error => this.errorCreate(error))
         }
+      },
+      createSuccessful (response) {
+        if (!response.data.csrf) {
+          this.errorCreate(response)
+          return
+        }
+        this.$http.secured.get('/ads')
+          .then(allResponse => {
+            this.$store.commit('createAd', { title: allResponse.data.title,
+                                             description: allResponse.data.description,
+                                             promo: allResponse.data.promo,
+                                             id: allResponse.data.id })
+            this.error = ''
+            this.$router.replace('/list')
+          })
+      },
+      errorCreate (error) {
+        this.error = (error.response && error.response.data && error.response.data.error)
+        this.$store.commit('setError', error.response.data)
+        this.$router.replace('/list')
       }
     }
   }
