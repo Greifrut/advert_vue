@@ -27,7 +27,7 @@
     props: ['id'],
     computed: {
       ad () {
-        const id = this.id
+        const id = parseInt(this.id)
         return this.$store.getters.adById(id)
       }
     }
