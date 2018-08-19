@@ -97,7 +97,7 @@
           title: response.data.title,
           description: response.data.description,
           userId: response.data.user_id,
-          imageSrc: '',
+          imageSrc: "localhost:3000" + response.data.image_url,
           promo: response.data.promo,
           id: response.data.id
         })

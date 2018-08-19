@@ -101,7 +101,8 @@
               description: ad.description,
               promo: ad.promo,
               id: ad.id,
-              userId: ad.user_id
+              userId: ad.user_id,
+              imageSrc: "http://localhost:3000" +  ad.image_url
             })
           })
         })

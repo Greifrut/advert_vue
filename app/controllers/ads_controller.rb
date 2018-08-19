@@ -5,12 +5,12 @@ class AdsController < ApplicationController
   # GET /ads
   def index
     @ads = Ad.all
-    render json: @ads, only: [:title, :description, :user_id], methods: [:image_url]
+    render json: @ads, only: [:id, :title, :description, :user_id], methods: [:image_url]
   end
 
   # GET /ads/1
   def show
-    render json: @ad
+    render json: @ad, only: [:id, :title, :description, :user_id], methods: [:image_url]
   end
 
   # POST /ads
@@ -21,7 +21,7 @@ class AdsController < ApplicationController
     @ad.image = image
 
     if @ad.save
-      render json: @ad, status: :created, location: @ad
+      render json: @ad, only: [:id, :title, :description, :user_id], methods: [:image_url], status: :created, location: @ad
     else
       render json: @ad.errors, status: :unprocessable_entity
     end
