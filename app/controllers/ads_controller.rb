@@ -47,6 +47,6 @@ class AdsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def ad_params
-      params.require(:ads).permit(:title, :description, :promo)
+      params.require(:ads).permit(:title, :description, :promo, :image, :user_id)
     end
 end
