@@ -8,7 +8,9 @@ class Ad < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
 
-
+  def image_url
+    image.url
+  end
 end
 
 

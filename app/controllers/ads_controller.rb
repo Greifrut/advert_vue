@@ -5,8 +5,7 @@ class AdsController < ApplicationController
   # GET /ads
   def index
     @ads = Ad.all
-
-    render json: @ads
+    render json: @ads, only: [:title, :description, :user_id], methods: [:image_url]
   end
 
   # GET /ads/1
@@ -40,6 +39,10 @@ class AdsController < ApplicationController
   # DELETE /ads/1
   def destroy
     @ad.destroy
+  end
+
+  def image
+    @ad.image.url
   end
 
   private
