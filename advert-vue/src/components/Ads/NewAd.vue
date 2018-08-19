@@ -85,7 +85,8 @@
             description: this.description,
             promo: this.promo,
             user_id: this.$store.state.user.currentUser.id,
-            image: this.imageSrc
+            image: this.imageSrc,
+            imageName: this.image.name
           }})
             .then(response => this.createSuccessful(response))
             .catch(error => this.errorCreate(error))
@@ -115,10 +116,10 @@
         const reader = new FileReader()
         reader.onload = e => {
           this.imageSrc = reader.result
+          console.log(this.imageSrc)
         }
         reader.readAsDataURL(file)
         this.image = file
-
       }
     }
   }

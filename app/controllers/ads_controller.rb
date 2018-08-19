@@ -17,6 +17,9 @@ class AdsController < ApplicationController
   # POST /ads
   def create
     @ad = current_user.ads.build(ad_params)
+    image = Paperclip.io_adapters.for(params[:ads][:image])
+    image.original_filename = params[:ads][:imageName]
+    @ad.image = image
 
     if @ad.save
       render json: @ad, status: :created, location: @ad
