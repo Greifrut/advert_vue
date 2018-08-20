@@ -102,7 +102,7 @@
               promo: ad.promo,
               id: ad.id,
               userId: ad.user_id,
-              imageSrc: "http://localhost:3000" +  ad.image_url
+              imageSrc: 'http://localhost:3000' + ad.image_url
             })
           })
         })

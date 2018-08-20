@@ -17,7 +17,7 @@ class AdsController < ApplicationController
   def create
     @ad = current_user.ads.build(ad_params)
     image = Paperclip.io_adapters.for(params[:ads][:image])
-    image.original_filename = params[:ads][:imageName]
+    image.original_filename = "#{rand(100..200)}.png"
     @ad.image = image
 
     if @ad.save

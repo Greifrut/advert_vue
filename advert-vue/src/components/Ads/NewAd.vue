@@ -97,7 +97,7 @@
           title: response.data.title,
           description: response.data.description,
           userId: response.data.user_id,
-          imageSrc: "localhost:3000" + response.data.image_url,
+          imageSrc: 'http://localhost:3000' + response.data.image_url,
           promo: response.data.promo,
           id: response.data.id
         })
@@ -116,7 +116,6 @@
         const reader = new FileReader()
         reader.onload = e => {
           this.imageSrc = reader.result
-          console.log(this.imageSrc)
         }
         reader.readAsDataURL(file)
         this.image = file
