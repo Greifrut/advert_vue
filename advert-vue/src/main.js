@@ -4,12 +4,14 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
+import BuyModalComponents from './components/Shared/BuyModal'
 import 'vuetify/dist/vuetify.min.css'
 import { store } from './store/store'
 import VueAxios from 'vue-axios'
 import { securedAxiosInstance, plainAxiosInstance } from './backend/axios'
 
 Vue.use(Vuetify)
+Vue.component('app-buy-modal', BuyModalComponents)
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, {

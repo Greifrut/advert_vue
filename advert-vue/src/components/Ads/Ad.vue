@@ -14,7 +14,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <app-edit-ad :ad="ad" ></app-edit-ad>
-            <v-btn color="success">Buy</v-btn>
+            <app-buy-modal></app-buy-modal>
           </v-card-actions>
         </v-card>
       </v-flex>
