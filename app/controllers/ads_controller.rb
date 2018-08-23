@@ -5,12 +5,12 @@ class AdsController < ApplicationController
   # GET /ads
   def index
     @ads = Ad.all
-    render json: @ads, only: [:id, :title, :description, :user_id], methods: [:image_url]
+    render json: @ads, only: [:id, :title, :description, :user_id, :promo], methods: [:image_url]
   end
 
   # GET /ads/1
   def show
-    render json: @ad, only: [:id, :title, :description, :user_id], methods: [:image_url]
+    render json: @ad, only: [:id, :title, :description, :user_id, :promo], methods: [:image_url]
   end
 
   # POST /ads
