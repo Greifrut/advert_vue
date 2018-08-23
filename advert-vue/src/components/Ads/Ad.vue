@@ -13,7 +13,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn class="warning" flat>Edit</v-btn>
+            <app-edit-ad :ad="ad" ></app-edit-ad>
             <v-btn color="success">Buy</v-btn>
           </v-card-actions>
         </v-card>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import EditAd from './EditAd'
   export default {
     props: ['id'],
     computed: {
@@ -30,6 +31,9 @@
         const id = parseInt(this.id)
         return this.$store.getters.adById(id)
       }
+    },
+    components: {
+      appEditAd: EditAd
     }
   }
 </script>
