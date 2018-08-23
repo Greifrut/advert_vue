@@ -24,6 +24,13 @@ export default {
         id
       )
       state.ads.push(allAd)
+    },
+    updateAd (state, {title, description, id}) {
+      const ad = state.ads.find(a => {
+        return a.id === id
+      })
+      ad.title = title
+      ad.description = description
     }
   },
   actions: {},
