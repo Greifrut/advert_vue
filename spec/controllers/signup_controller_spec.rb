@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe SignupController, type: :controller do
@@ -18,4 +20,3 @@ RSpec.describe SignupController, type: :controller do
     end
   end
 end
-

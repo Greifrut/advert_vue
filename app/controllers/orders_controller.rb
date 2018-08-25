@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class OrdersController < ApplicationController
   before_action :authorize_access_request!
-  before_action :set_order, only: [:show, :destroy]
+  before_action :set_order, only: %i[show destroy]
 
   # GET /orders
   def index
@@ -31,13 +33,14 @@ class OrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def order_params
-      params.require(:order).permit(:name, :phone, :user_id, :ad_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order
+    @order = Order.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def order_params
+    params.require(:order).permit(:name, :phone, :user_id, :ad_id)
+  end
 end

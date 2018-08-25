@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class Ad < ApplicationRecord
   belongs_to :user
   has_many :orders
 
-  has_attached_file :image, default_url: "/images/missing.png"
+  has_attached_file :image, default_url: '/images/missing.png'
 
-  validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
+  validates_attachment_content_type :image, content_type: ['image/jpg', 'image/jpeg', 'image/png']
 
   validates :title, presence: true
   validates :description, presence: true
@@ -13,5 +15,3 @@ class Ad < ApplicationRecord
     image.url
   end
 end
-
-

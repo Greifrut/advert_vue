@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 class AdsController < ApplicationController
-  before_action :authorize_access_request!, only: [:create, :update, :destroy]
-  before_action :set_ad, only: [:show, :update, :destroy]
+  before_action :authorize_access_request!, only: %i[create update destroy]
+  before_action :set_ad, only: %i[show update destroy]
 
   # GET /ads
   def index
     @ads = Ad.all
-    render json: @ads, only: [:id, :title, :description, :user_id, :promo], methods: [:image_url]
+    render json: @ads, only: %i[id title description user_id promo], methods: [:image_url]
   end
 
   # GET /ads/1
   def show
-    render json: @ad, only: [:id, :title, :description, :user_id, :promo], methods: [:image_url]
+    render json: @ad, only: %i[id title description user_id promo], methods: [:image_url]
   end
 
   # POST /ads
@@ -21,7 +23,7 @@ class AdsController < ApplicationController
     @ad.image = image
 
     if @ad.save
-      render json: @ad, only: [:id, :title, :description, :user_id], methods: [:image_url], status: :created, location: @ad
+      render json: @ad, only: %i[id title description user_id], methods: [:image_url], status: :created, location: @ad
     else
       render json: @ad.errors, status: :unprocessable_entity
     end
@@ -46,13 +48,14 @@ class AdsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_ad
-      @ad = Ad.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def ad_params
-      params.require(:ads).permit(:title, :description, :promo, :image, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_ad
+    @ad = Ad.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def ad_params
+    params.require(:ads).permit(:title, :description, :promo, :image, :user_id)
+  end
 end

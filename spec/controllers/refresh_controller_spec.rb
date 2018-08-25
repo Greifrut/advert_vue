@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe RefreshController, type: :controller do
   let(:access_cookie) { @tokens[:access] }
   let(:csrf_token) { @tokens[:csrf] }
 
-  describe "POST #create" do
+  describe 'POST #create' do
     let(:user) { create(:user) }
 
-    context "success" do
+    context 'success' do
       before do
         JWTSessions.access_exp_time = 0
         payload = { user_id: user.id }
@@ -26,7 +28,7 @@ RSpec.describe RefreshController, type: :controller do
       end
     end
 
-    context "failure" do
+    context 'failure' do
       before do
         payload = { user_id: user.id }
         session = JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true)
@@ -40,6 +42,5 @@ RSpec.describe RefreshController, type: :controller do
         expect(response).to have_http_status(200)
       end
     end
-
   end
 end

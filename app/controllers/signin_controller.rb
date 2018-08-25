@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SigninController < ApplicationController
   before_action :authorize_access_request!, only: [:destroy]
 
@@ -14,7 +16,7 @@ class SigninController < ApplicationController
                           value: tokens[:access],
                           httponly: true,
                           secure: Rails.env.production?)
-      render json: { csrf: tokens[:csrf]}
+      render json: { csrf: tokens[:csrf] }
     else
       render json: 'Invalid email or password', status: :unauthorized
     end
