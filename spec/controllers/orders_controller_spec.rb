@@ -77,10 +77,25 @@ RSpec.describe OrdersController, type: :controller do
         request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
         post :create, params: { order: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.content_type).to eq('application/json')
       end
     end
     
   end
+
+  describe "DELETE #destroy" do
+    let!(:order) { create(:order, user: user) }
+
+    it "destroy the requested order" do
+      request.cookies[JWTSessions.access_cookie] = @tokens[:access]
+      request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
+      expect do
+        delete :destroy, params: { id: order.id }
+      end.to change(Order, :count).by(-1)
+    end
+    
+  end
+  
   
 
 end
