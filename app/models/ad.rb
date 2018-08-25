@@ -1,5 +1,6 @@
 class Ad < ApplicationRecord
   belongs_to :user
+  has_many :orders
 
   has_attached_file :image, default_url: "/images/missing.png"
 

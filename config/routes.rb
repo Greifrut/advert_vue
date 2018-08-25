@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :orders
   resources :ads
   post   'refresh',   controller: :refresh,  action: :create
   post   'signup',    controller: :signup,   action: :create
