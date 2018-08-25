@@ -30,5 +30,11 @@ RSpec.describe OrdersController, type: :controller do
       expect(response_json.size).to eq 1
       expect(response_json.first['id']).to eq order.id
     end
+
+    it 'unauth without cookie' do
+      get :index
+      expect(response).to have_http_status(401)
+    end
   end
+
 end
