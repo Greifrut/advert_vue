@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,43 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_180_825_142_024) do
+ActiveRecord::Schema.define(version: 2018_08_25_144631) do
+
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'ads', force: :cascade do |t|
-    t.string 'title', null: false
-    t.string 'description', null: false
-    t.boolean 'promo', default: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.bigint 'user_id'
-    t.string 'image_file_name'
-    t.string 'image_content_type'
-    t.integer 'image_file_size'
-    t.datetime 'image_updated_at'
-    t.index ['user_id'], name: 'index_ads_on_user_id'
+  create_table "ads", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "description", null: false
+    t.boolean "promo", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.index ["user_id"], name: "index_ads_on_user_id"
   end
 
-  create_table 'orders', force: :cascade do |t|
-    t.string 'name'
-    t.integer 'phone'
-    t.bigint 'ad_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.bigint 'user_id'
-    t.index ['ad_id'], name: 'index_orders_on_ad_id'
-    t.index ['user_id'], name: 'index_orders_on_user_id'
+  create_table "orders", force: :cascade do |t|
+    t.string "owner_name"
+    t.integer "owner_phone"
+    t.integer "ad_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'email', null: false
-    t.string 'password_digest', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_foreign_key 'ads', 'users'
-  add_foreign_key 'orders', 'ads'
-  add_foreign_key 'orders', 'users'
+  add_foreign_key "ads", "users"
+  add_foreign_key "orders", "users"
 end
