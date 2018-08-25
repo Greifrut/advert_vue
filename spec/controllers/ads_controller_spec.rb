@@ -29,11 +29,6 @@ RSpec.describe AdsController, type: :controller do
       expect(response_json.size).to eq 1
       expect(response_json.first['id']).to eq ad.id
     end
-
-    it 'unauth without cookie' do
-      get :index
-      expect(response).to have_http_status(401)
-    end
   end
 
   describe 'GET #show' do
