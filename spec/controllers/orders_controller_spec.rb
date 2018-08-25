@@ -5,7 +5,7 @@ RSpec.describe OrdersController, type: :controller do
 
 
   let(:valid_attributes) {
-    { owner_name: 'Name', owner_phone: 854785599, ad_id: ad.id }
+    { owner_name: 'Name', owner_phone: 89751236548, ad_id: ad.id }
   }
 
   let(:invalid_attributes) {
@@ -53,6 +53,30 @@ RSpec.describe OrdersController, type: :controller do
         expect do
           post :create, params: { order: valid_attributes }
         end.to change(Order, :count).by(1)
+      end
+
+      it "render a JSON response with the new order" do
+        request.cookies[JWTSessions.access_cookie] = @tokens[:access]
+        request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
+        post :create, params: { order: valid_attributes }
+        expect(response).to have_http_status(:created)
+        expect(response.content_type).to eq('application/json')
+        expect(response.location).to eq(order_url(Order.last))
+      end
+      
+      it 'unauth without CSRF' do
+        request.cookies[JWTSessions.access_cookie] = @tokens[:access]
+        post :create, params: { order: valid_attributes }
+        expect(response).to have_http_status(401)
+      end
+    end
+
+    context "with invalid params" do
+      it 'renders a JSON response with errors for the new order' do
+        request.cookies[JWTSessions.access_cookie] = @tokens[:access]
+        request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
+        post :create, params: { order: invalid_attributes }
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
     
