@@ -68,7 +68,12 @@ export default {
           ad_id: this.ad.id
         }})
         .then(response => {
-          console.log(response.data)
+          this.$store.commit('createOrder', {
+            ownerName: response.data.owner_name,
+            ownerPhone: response.data.owner_phone,
+            adId: response.data.ad_id,
+            ownerId: response.data.user_id
+          })
         })
         .catch(error => {
           this.$store.commit('setError', error.response.data.error)

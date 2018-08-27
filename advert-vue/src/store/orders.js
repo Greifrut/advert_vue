@@ -8,7 +8,7 @@ class Order {
 }
 
 export default {
-  store: {
+  state: {
     orders: []
   },
   mutations: {
@@ -19,7 +19,7 @@ export default {
         adId,
         ownerId
       )
-      state.push(allOrders)
+      state.orders.push(allOrders)
     }
   },
   actions: {},
