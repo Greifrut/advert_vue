@@ -1,5 +1,6 @@
 class Order {
-  constructor (ownerName, ownerPhone, adId, ownerId) {
+  constructor (id, ownerName, ownerPhone, adId, ownerId) {
+    this.id = id
     this.ownerName = ownerName
     this.ownerPhone = ownerPhone
     this.adId = adId
@@ -12,8 +13,9 @@ export default {
     orders: []
   },
   mutations: {
-    createOrder (state, {ownerName, ownerPhone, adId, ownerId}) {
+    createOrder (state, {id, ownerName, ownerPhone, adId, ownerId}) {
       const allOrders = new Order(
+        id,
         ownerName,
         ownerPhone,
         adId,
@@ -23,5 +25,9 @@ export default {
     }
   },
   actions: {},
-  getters: {}
+  getters: {
+    orders (state) {
+      return state.orders
+    }
+  }
 }

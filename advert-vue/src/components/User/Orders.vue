@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout row>
-      <v-flex xs12 sm6 offset-sm3>
+      <v-flex xs12 sm6 offset-sm3 v-if="orders.length !== 0">
         <h1 class="text--secondary mb-3">Orders</h1>
         <v-list two-line subheader>
           <v-list-tile
@@ -17,13 +17,13 @@
               ></v-checkbox>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title> {{order.name}} </v-list-tile-title>
-              <v-list-tile-sub-title> {{order.phone}} </v-list-tile-sub-title>
+              <v-list-tile-title> {{order.ownerName}} </v-list-tile-title>
+              <v-list-tile-sub-title> {{order.ownerPhone}} </v-list-tile-sub-title>
             </v-list-tile-content>
             <v-list-tile-action>
               <v-btn
                 class="primary"
-                :to="'/ad/' + order.id"
+                :to="'/ad/' + order.adId"
               >Open</v-btn>
             </v-list-tile-action>
           </v-list-tile>
@@ -35,17 +35,9 @@
 
 <script>
   export default {
-    data () {
-      return {
-        orders: [
-          {
-            id: '1',
-            name: 'Artur',
-            phone: '89781402320',
-            adId: '2',
-            done: false
-          }
-        ]
+    computed: {
+      orders () {
+        return this.$store.getters.orders
       }
     },
     methods: {

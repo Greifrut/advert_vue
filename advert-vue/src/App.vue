@@ -106,6 +106,19 @@
             })
           })
         })
+      this.$http.secured.get('/orders')
+        .then(response => {
+          Object.keys(response.data).forEach(key => {
+            const order = response.data[key]
+            this.$store.commit('createOrder', {
+              id: order.id,
+              ownerName: order.owner_name,
+              ownerPhone: order.owner_phone,
+              adId: order.ad_id,
+              ownerId: order.user_id
+            })
+          })
+        })
     },
     computed: {
       isUserLoggedIn () {

@@ -69,6 +69,7 @@ export default {
         }})
         .then(response => {
           this.$store.commit('createOrder', {
+            id: response.data.id,
             ownerName: response.data.owner_name,
             ownerPhone: response.data.owner_phone,
             adId: response.data.ad_id,
