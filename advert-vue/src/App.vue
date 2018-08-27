@@ -27,7 +27,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-toolbar app dark color="primary">
+    <v-toolbar app dark flat color="primary">
       <v-toolbar-side-icon
        @click="drawer = !drawer"
        class="hidden-md-and-up"
@@ -103,19 +103,6 @@
               id: ad.id,
               userId: ad.user_id,
               imageSrc: 'http://localhost:3000' + ad.image_url
-            })
-          })
-        })
-      this.$http.secured.get('/orders')
-        .then(response => {
-          Object.keys(response.data).forEach(key => {
-            const order = response.data[key]
-            this.$store.commit('createOrder', {
-              id: order.id,
-              ownerName: order.owner_name,
-              ownerPhone: order.owner_phone,
-              adId: order.ad_id,
-              ownerId: order.user_id
             })
           })
         })

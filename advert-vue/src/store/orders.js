@@ -22,6 +22,9 @@ export default {
         ownerId
       )
       state.orders.push(allOrders)
+    },
+    deleteOrder (state, index) {
+      state.orders.splice(index, 1)
     }
   },
   actions: {},

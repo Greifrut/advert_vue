@@ -33,6 +33,9 @@ export default {
     isUserLoggedIn (state) {
       return state.signedIn
     },
+    currentUser (state) {
+      return state.currentUser.id
+    },
     error (state) {
       return state.error
     }

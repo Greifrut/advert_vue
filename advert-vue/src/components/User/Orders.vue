@@ -35,14 +35,39 @@
 
 <script>
   export default {
+    created () {
+      if (this.orders.length === 0) {
+        this.$http.secured.get('/orders')
+          .then(response => {
+            Object.keys(response.data).forEach(key => {
+              const order = response.data[key]
+              this.$store.commit('createOrder', {
+                id: order.id,
+                ownerName: order.owner_name,
+                ownerPhone: order.owner_phone,
+                adId: order.ad_id,
+                ownerId: order.user_id
+              })
+            })
+          })
+      }
+    },
     computed: {
       orders () {
         return this.$store.getters.orders
+      },
+      currentUser () {
+        return this.$store.getters.currentUser
       }
     },
     methods: {
       markDone (order) {
-        order.done = true
+        this.$http.secured.delete('/orders/' + order.id)
+          .then(response => {
+            this.$store.commit('deleteOrder', {
+              index: this.orders.indexOf(order)
+            })
+          })
       }
     }
   }
