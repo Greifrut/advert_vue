@@ -3,7 +3,7 @@
     <v-container fluid>
       <v-layout row>
         <v-flex xs12>
-          <v-carousel>
+          <v-carousel v-if="promoAds.length !== 0">
             <v-carousel-item
             v-for="ad in promoAds"
             :key="ad.id"
