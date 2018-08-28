@@ -26,25 +26,30 @@
           v-for="ad in ads"
           :key="ad.id"
         >
-          <v-card>
-            <v-card-media
-              :src="ad.imageSrc"
-              height="200px"
-            ></v-card-media>
+          <v-hover>
+            <v-card
+              slot-scope="{ hover }"
+              :class="`elevation-${hover ? 12 : 2}`"
+            >
+              <v-card-media
+                :src="ad.imageSrc"
+                height="200px"
+              ></v-card-media>
 
-            <v-card-title primary-title>
-              <div>
-                <h3 class="headline mb-0">{{ad.title}}</h3>
-                <div>{{ad.description}}</div>
-              </div>
-            </v-card-title>
+              <v-card-title primary-title>
+                <div>
+                  <h3 class="headline mb-0">{{ad.title}}</h3>
+                  <div>{{ad.description}}</div>
+                </div>
+              </v-card-title>
 
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn flat :to="'/ad/' + ad.id" >Open</v-btn>
-              <app-buy-modal :ad="ad"></app-buy-modal>
-            </v-card-actions>
-          </v-card>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn flat :to="'/ad/' + ad.id" >Open</v-btn>
+                <app-buy-modal :ad="ad"></app-buy-modal>
+              </v-card-actions>
+            </v-card>
+          </v-hover>
         </v-flex>
       </v-layout>
     </v-container>

@@ -8,6 +8,7 @@
           class="elevation-6 mb-3"
           v-for="ad in myAds"
           :key="ad.id"
+          v-if="ad.ownerId === currentUser"
           >
           <v-layout row>
             <v-flex xs4>
@@ -43,6 +44,9 @@
     computed: {
       myAds () {
         return this.$store.getters.myAds
+      },
+      currentUser () {
+        return this.$store.getters.currentUser
       }
     }
   }
