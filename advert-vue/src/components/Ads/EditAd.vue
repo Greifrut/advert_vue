@@ -1,6 +1,6 @@
 <template>
   <v-dialog width="400" v-model="modal">
-    <v-btn class="warning my-0 mx-2" flat slot="activator">Edit</v-btn>
+    <v-btn class="warning my-0 mx-2" flat slot="activator" v-if="editAdCurrentUser()" >Edit</v-btn>
 
     <v-card>
       <v-container>
@@ -55,7 +55,15 @@ export default {
       editDescription: this.ad.description
     }
   },
+  computed: {
+    currentUser () {
+      return this.$store.getters.currentUser
+    }
+  },
   methods: {
+    editAdCurrentUser () {
+      return this.ad.ownerId === this.currentUser
+    },
     onCancel () {
       this.editTitle = this.ad.title
       this.editDescription = this.ad.description
