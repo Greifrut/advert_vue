@@ -46,7 +46,8 @@
                 ownerName: order.owner_name,
                 ownerPhone: order.owner_phone,
                 adId: order.ad_id,
-                ownerId: order.user_id
+                ownerId: order.user_id,
+                done: order.done
               })
             })
           })
@@ -62,11 +63,9 @@
     },
     methods: {
       markDone (order) {
-        this.$http.secured.delete('/orders/' + order.id)
+        this.$http.secured.put('/orders/' + order.id, {order: {done: true}})
           .then(response => {
-            this.$store.commit('deleteOrder', {
-              index: this.orders.indexOf(order)
-            })
+            console.log(response.data)
           })
       }
     }

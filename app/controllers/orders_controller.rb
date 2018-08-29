@@ -25,6 +25,14 @@ class OrdersController < ApplicationController
     end
   end
 
+  def update
+    if @order.update(order_params)
+      render json: @order
+    else
+      render json: @order.errors, status: :unprocessable_entity
+    end
+  end
+
   # DELETE /orders/1
   def destroy
     @order.destroy
@@ -38,6 +46,6 @@ class OrdersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      params.require(:order).permit(:owner_name, :owner_phone, :ad_id, :user_id)
+      params.require(:order).permit(:owner_name, :owner_phone, :ad_id, :user_id, :done)
     end
 end

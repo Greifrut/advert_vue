@@ -1,10 +1,11 @@
 class Order {
-  constructor (id, ownerName, ownerPhone, adId, ownerId) {
+  constructor (id, ownerName, ownerPhone, adId, ownerId, done) {
     this.id = id
     this.ownerName = ownerName
     this.ownerPhone = ownerPhone
     this.adId = adId
     this.ownerId = ownerId
+    this.done = done
   }
 }
 
@@ -13,18 +14,25 @@ export default {
     orders: []
   },
   mutations: {
-    createOrder (state, {id, ownerName, ownerPhone, adId, ownerId}) {
+    createOrder (state, {id, ownerName, ownerPhone, adId, ownerId, done}) {
       const allOrders = new Order(
         id,
         ownerName,
         ownerPhone,
         adId,
-        ownerId
+        ownerId,
+        done
       )
       state.orders.push(allOrders)
     },
     deleteOrder (state, index) {
       state.orders.splice(index, 1)
+    },
+    updateOrder (state, id) {
+      const ord = state.orders.find(o => {
+        return o.id === id
+      })
+      ord.done = true
     }
   },
   actions: {},
