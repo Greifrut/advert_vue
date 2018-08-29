@@ -27,7 +27,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-toolbar app dark flat color="primary">
+    <v-toolbar app dark flat color="purple darken-4">
       <v-toolbar-side-icon
        @click="drawer = !drawer"
        class="hidden-md-and-up"
