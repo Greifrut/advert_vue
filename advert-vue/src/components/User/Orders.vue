@@ -1,12 +1,12 @@
 <template>
   <v-container>
     <v-layout row>
-      <v-flex xs12 sm6 offset-sm3 v-if="orders.length !== 0">
+      <v-flex xs12 md6 sm12 offset-md3 v-if="orders.length !== 0">
         <h1 class="text--secondary mb-3">Orders</h1>
         <v-list two-line subheader>
           <v-list-tile
             avatar
-            v-for="order in orders"
+            v-for="(order, index) in orders"
             :key="order.id"
           >
             <v-list-tile-action>
@@ -19,16 +19,22 @@
             <v-list-tile-content>
               <v-list-tile-title> {{order.ownerName}} </v-list-tile-title>
               <v-list-tile-sub-title> {{order.ownerPhone}} </v-list-tile-sub-title>
-              <v-divider></v-divider>
             </v-list-tile-content>
             <v-list-tile-action>
-              <v-btn
-                class="primary"
-                :to="'/ad/' + order.adId"
-              >Open</v-btn>
-              <v-btn
-                class="error"
-              ></v-btn>
+              <v-layout row>  
+                <v-scroll-x-transition>            
+                  <v-btn
+                  class="primary"
+                  :to="'/ad/' + order.adId"
+                >Open</v-btn>
+                </v-scroll-x-transition>
+                <v-scroll-x-transition>
+                  <v-btn
+                    v-if="order.done"
+                    class="error ml-1"
+                  >Delete</v-btn>
+                </v-scroll-x-transition>
+              </v-layout>
             </v-list-tile-action>
           </v-list-tile>
         </v-list>
