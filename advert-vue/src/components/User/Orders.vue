@@ -19,12 +19,16 @@
             <v-list-tile-content>
               <v-list-tile-title> {{order.ownerName}} </v-list-tile-title>
               <v-list-tile-sub-title> {{order.ownerPhone}} </v-list-tile-sub-title>
+              <v-divider></v-divider>
             </v-list-tile-content>
             <v-list-tile-action>
               <v-btn
                 class="primary"
                 :to="'/ad/' + order.adId"
               >Open</v-btn>
+              <v-btn
+                class="error"
+              ></v-btn>
             </v-list-tile-action>
           </v-list-tile>
         </v-list>
@@ -63,9 +67,12 @@
     },
     methods: {
       markDone (order) {
-        this.$http.secured.put('/orders/' + order.id, {order: {done: true}})
+        this.$http.secured.put('/orders/' + order.id, {order: {done: order.done}})
           .then(response => {
-            console.log(response.data)
+            this.$store.commit('updateOrder', {
+              id: order.id,
+              done: response.data.done
+            })
           })
       }
     }

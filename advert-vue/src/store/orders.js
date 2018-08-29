@@ -28,11 +28,11 @@ export default {
     deleteOrder (state, index) {
       state.orders.splice(index, 1)
     },
-    updateOrder (state, id) {
+    updateOrder (state, {id, done}) {
       const ord = state.orders.find(o => {
         return o.id === id
       })
-      ord.done = true
+      ord.done = done
     }
   },
   actions: {},

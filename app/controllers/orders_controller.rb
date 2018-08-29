@@ -27,6 +27,8 @@ class OrdersController < ApplicationController
 
   def update
     if @order.update(order_params)
+      @order.done == true ? @order.done = false : @order.done = true
+      @order.save
       render json: @order
     else
       render json: @order.errors, status: :unprocessable_entity
