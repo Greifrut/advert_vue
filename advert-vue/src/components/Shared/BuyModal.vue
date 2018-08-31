@@ -63,18 +63,19 @@ export default {
     onSave () {
       if (this.name !== '' && this.phone !== '') {
         this.$http.secured.post('/orders', {order: {
-          owner_name: this.name,
-          owner_phone: this.phone,
+          purchaser_name: this.name,
+          purchaser_phone: this.phone,
           ad_id: this.ad.id,
-          owner_id: this.ad.owner_id 
+          owner_id: this.ad.ownerId 
         }})
         .then(response => {
           this.$store.commit('createOrder', {
             id: response.data.id,
-            ownerName: response.data.owner_name,
-            ownerPhone: response.data.owner_phone,
+            purchaserName: response.data.owner_name,
+            purchaserPhone: response.data.owner_phone,
             adId: response.data.ad_id,
-            ownerId: response.data.user_id
+            purchaserId: response.data.user_id,
+            done: response.data.done
           })
         })
         .catch(error => {
