@@ -6,7 +6,7 @@
         <v-list two-line subheader>
           <v-list-tile
             avatar
-            v-for="(order, index) in orders"
+            v-for="order in orders"
             :key="order.id"
           >
             <v-list-tile-action>
