@@ -65,7 +65,8 @@ export default {
         this.$http.secured.post('/orders', {order: {
           owner_name: this.name,
           owner_phone: this.phone,
-          ad_id: this.ad.id
+          ad_id: this.ad.id,
+          owner_id: this.ad.owner_id 
         }})
         .then(response => {
           this.$store.commit('createOrder', {
