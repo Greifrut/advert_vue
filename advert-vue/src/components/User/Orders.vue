@@ -17,8 +17,8 @@
               ></v-checkbox>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title> {{order.ownerName}} </v-list-tile-title>
-              <v-list-tile-sub-title> {{order.ownerPhone}} </v-list-tile-sub-title>
+              <v-list-tile-title> {{order.purchaserName}} </v-list-tile-title>
+              <v-list-tile-sub-title> {{order.purchaserPhone}} </v-list-tile-sub-title>
             </v-list-tile-content>
             <v-list-tile-action>
               <v-layout row>  
@@ -53,11 +53,12 @@
               const order = response.data[key]
               this.$store.commit('createOrder', {
                 id: order.id,
-                ownerName: order.owner_name,
-                ownerPhone: order.owner_phone,
+                purchaserName: order.purchaser_name,
+                purchaserPhone: order.purchaser_phone,
                 adId: order.ad_id,
-                ownerId: order.user_id,
-                done: order.done
+                purchaserId: order.user_id,
+                done: order.done,
+                ownerId: order.owner_id
               })
             })
           })
