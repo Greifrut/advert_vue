@@ -66,7 +66,7 @@
     },
     computed: {
       orders () {
-        return this.$store.getters.orders
+        return this.$store.getters.orders(this.currentUser)
       },
       currentUser () {
         return this.$store.getters.currentUser
