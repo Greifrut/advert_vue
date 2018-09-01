@@ -39,8 +39,11 @@ export default {
   },
   actions: {},
   getters: {
-    orders: (state) => (id) => {
+    myOrders: (state) => (id) => {
       return state.orders.filter(o => o.purchaserId === id)
+    },
+    userOrders: (state) => (id) => {
+      return state.orders.filter(o => o.ownerId === id)
     }
   }
 }
