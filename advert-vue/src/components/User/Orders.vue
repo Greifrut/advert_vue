@@ -31,6 +31,7 @@
                 <v-scroll-x-transition>
                   <v-btn
                     v-if="order.done"
+                    @click="cancelOrder(order)"                
                     class="error ml-1"
                   >Delete</v-btn>
                 </v-scroll-x-transition>
@@ -73,6 +74,7 @@
                 <v-scroll-x-transition>
                   <v-btn
                     v-if="order.done"
+                    @click="cancelOrder(order)"
                     class="success ml-1"
                   >Delete</v-btn>
                 </v-scroll-x-transition>
