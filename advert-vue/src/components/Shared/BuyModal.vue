@@ -66,20 +66,20 @@ export default {
           purchaser_name: this.name,
           purchaser_phone: this.phone,
           ad_id: this.ad.id,
-          owner_id: this.ad.ownerId 
+          owner_id: this.ad.ownerId
         }})
         .then(response => {
           this.$store.commit('createOrder', {
             id: response.data.id,
-            purchaserName: response.data.owner_name,
-            purchaserPhone: response.data.owner_phone,
+            purchaserName: response.data.purchaser_name,
+            purchaserPhone: response.data.purchaser_phone,
             adId: response.data.ad_id,
-            purchaserId: response.data.user_id,
-            done: response.data.done
+            done: response.data.done,
+            ownerId: response.data.owner_id
           })
         })
         .catch(error => {
-          this.$store.commit('setError', error.response.data.error)
+          this.$store.commit('setError', error.response.data)
         })
         this.modal = false
       }

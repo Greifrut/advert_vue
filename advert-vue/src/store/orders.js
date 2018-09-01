@@ -1,11 +1,12 @@
 class Order {
-  constructor (id, purchaserName, purchaserPhone, adId, purchaserId, done) {
+  constructor (id, purchaserName, purchaserPhone, adId, purchaserId, done, ownerId) {
     this.id = id
     this.purchaserName = purchaserName
     this.purchaserPhone = purchaserPhone
     this.adId = adId
     this.purchaserId = purchaserId
     this.done = done
+    this.ownerId = ownerId
   }
 }
 
@@ -14,14 +15,15 @@ export default {
     orders: []
   },
   mutations: {
-    createOrder (state, {id, purchaserName, purchaserPhone, adId, purchaserId, done}) {
+    createOrder (state, {id, purchaserName, purchaserPhone, adId, purchaserId, done, ownerId}) {
       const allOrders = new Order(
         id,
         purchaserName,
         purchaserPhone,
         adId,
         purchaserId,
-        done
+        done,
+        ownerId
       )
       state.orders.push(allOrders)
     },

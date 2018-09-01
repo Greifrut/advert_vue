@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2018_08_31_181056) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "done", default: false
+    t.integer "owner_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
