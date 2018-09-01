@@ -44,6 +44,9 @@ export default {
     },
     userOrders: (state) => (id) => {
       return state.orders.filter(o => o.ownerId === id)
+    },
+    completeOrders (state) {
+      return state.orders.filter(o => o.done).length
     }
   }
 }

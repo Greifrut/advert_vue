@@ -3,6 +3,28 @@
     <v-layout row>
       <v-flex xs12 md6 sm12 offset-md3 v-if="myOrders.length !== 0">
         <h1 class="text--secondary mb-3">My Orders</h1>
+        <v-layout
+          my-4
+          align-center
+        >
+        <strong class="mx-3 info--text text--darken-3">
+          Remaining: {{ remainingOrders }}
+        </strong>
+
+        <v-divider vertical></v-divider>
+
+        <strong class="mx-3 black--text">
+          Completed: {{ completedOrders }}
+        </strong>
+
+        <v-spacer></v-spacer>
+
+        <v-progress-circular
+          :value="progress"
+          color="green"
+          class="mr-2"
+        ></v-progress-circular>
+      </v-layout>
         <v-list two-line subheader>
           <v-list-tile
             avatar
@@ -117,6 +139,15 @@
       },
       userOrders () {
         return this.$store.getters.userOrders(this.currentUser)
+      },
+      completedOrders () {
+        return this.$store.getters.completeOrders
+      },
+      remainingOrders () {
+        return this.$store.state.orders.orders.length - this.completedOrders
+      },
+      progress () {
+        return this.completedOrders / this.$store.state.orders.orders.length * 100
       }
     },
     methods: {
