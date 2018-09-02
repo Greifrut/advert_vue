@@ -7,6 +7,6 @@ Run rails
   
 Run VueJS app
 
-    $ cd todos-vue
+    $ cd advert-vue
     $ npm install
     $ npm run dev
