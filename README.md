@@ -1,3 +1,7 @@
+Run redis
+
+    $ redis-server
+
 Run rails
 
     $ bundle install
